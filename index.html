@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEJ6E+J9ZY3hS+OR0BaSWhXodEqvpoe8d7akzW5XY1kL9QZJ1ImK3nKHZYKsy" crossorigin="anonymous">
+    <style>
+        .calculator {
+            width: 300px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f7f7f7;
+        }
+        .display {
+            width: 100%;
+            height: 50px;
+            background-color: #222;
+            color: white;
+            text-align: right;
+            font-size: 2rem;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        .button {
+            padding: 20px;
+            font-size: 1.5rem;
+            background-color: #ddd;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #ccc;
+        }
+        .button:active {
+            background-color: #aaa;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="calculator">
+        <div class="display" id="display"></div>
+        <div class="buttons">
+            <button class="button" id="btn1">1</button>
+            <button class="button" id="btn2">2</button>
+            <button class="button" id="btn3">3</button>
+            <button class="button" id="btnAdd">+</button>
+            <button class="button" id="btn4">4</button>
+            <button class="button" id="btn5">5</button>
+            <button class="button" id="btn6">6</button>
+            <button class="button" id="btnSub">-</button>
+            <button class="button" id="btn7">7</button>
+            <button class="button" id="btn8">8</button>
+            <button class="button" id="btn9">9</button>
+            <button class="button" id="btnMul">*</button>
+            <button class="button" id="btn0">0</button>
+            <button class="button" id="btnMod">%</button>
+            <button class="button" id="btnSquare">x²</button>
+            <button class="button" id="btnDiv">/</button>
+            <button class="button" id="btnAC">AC</button>
+            <button class="button" id="btnEqual">=</button>
+        </div>
+    </div>
+
+    <script>
+        let display = document.getElementById("display");
+        let currentInput = "";
+        let prevInput = "";
+        let operator = "";
+
+        // Function to update display
+        function updateDisplay() {
+            display.innerText = currentInput;
+        }
+
+        // Button event listeners
+        document.getElementById("btn1").addEventListener("click", () => {
+            currentInput += "1";
+            updateDisplay();
+        });
+        document.getElementById("btn2").addEventListener("click", () => {
+            currentInput += "2";
+            updateDisplay();
+        });
+        document.getElementById("btn3").addEventListener("click", () => {
+            currentInput += "3";
+            updateDisplay();
+        });
+        document.getElementById("btn4").addEventListener("click", () => {
+            currentInput += "4";
+            updateDisplay();
+        });
+        document.getElementById("btn5").addEventListener("click", () => {
+            currentInput += "5";
+            updateDisplay();
+        });
+        document.getElementById("btn6").addEventListener("click", () => {
+            currentInput += "6";
+            updateDisplay();
+        });
+        document.getElementById("btn7").addEventListener("click", () => {
+            currentInput += "7";
+            updateDisplay();
+        });
+        document.getElementById("btn8").addEventListener("click", () => {
+            currentInput += "8";
+            updateDisplay();
+        });
+        document.getElementById("btn9").addEventListener("click", () => {
+            currentInput += "9";
+            updateDisplay();
+        });
+        document.getElementById("btn0").addEventListener("click", () => {
+            currentInput += "0";
+            updateDisplay();
+        });
+
+        document.getElementById("btnAdd").addEventListener("click", () => {
+            prevInput = currentInput;
+            currentInput = "";
+            operator = "+";
+        });
+        document.getElementById("btnSub").addEventListener("click", () => {
+            prevInput = currentInput;
+            currentInput = "";
+            operator = "-";
+        });
+        document.getElementById("btnMul").addEventListener("click", () => {
+            prevInput = currentInput;
+            currentInput = "";
+            operator = "*";
+        });
+        document.getElementById("btnDiv").addEventListener("click", () => {
+            prevInput = currentInput;
+            currentInput = "";
+            operator = "/";
+        });
+        document.getElementById("btnMod").addEventListener("click", () => {
+            prevInput = currentInput;
+            currentInput = "";
+            operator = "%";
+        });
+        document.getElementById("btnSquare").addEventListener("click", () => {
+            currentInput = Math.pow(parseFloat(currentInput), 2).toString();
+            updateDisplay();
+        });
+
+        document.getElementById("btnAC").addEventListener("click", () => {
+            currentInput = "";
+            prevInput = "";
+            operator = "";
+            updateDisplay();
+        });
+
+        document.getElementById("btnEqual").addEventListener("click", () => {
+            let result;
+            switch (operator) {
+                case "+":
+                    result = parseFloat(prevInput) + parseFloat(currentInput);
+                    break;
+                case "-":
+                    result = parseFloat(prevInput) - parseFloat(currentInput);
+                    break;
+                case "*":
+                    result = parseFloat(prevInput) * parseFloat(currentInput);
+                    break;
+                case "/":
+                    result = parseFloat(prevInput) / parseFloat(currentInput);
+                    break;
+                case "%":
+                    result = parseFloat(prevInput) % parseFloat(currentInput);
+                    break;
+                default:
+                    return;
+            }
+            currentInput = result.toString();
+            updateDisplay();
+            operator = "";
+            prevInput = "";
+        });
+    </script>
+
+</body>
+</html>
